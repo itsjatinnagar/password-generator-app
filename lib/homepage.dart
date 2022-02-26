@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pass_gen/generator.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -61,9 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() => includes['symbols'] = newValue),
             ),
             ElevatedButton(
-              onPressed: () {
-                print(includes);
-              },
+              onPressed: () => generatePassword(passwordLength, includes),
               child: const Text('Generate Password'),
             ),
           ],
