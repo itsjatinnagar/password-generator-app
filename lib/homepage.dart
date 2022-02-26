@@ -9,7 +9,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int passwordLength = 16;
-  bool lower = true, upper = true, numbers = true, symbols = true;
+  Map<String, bool> includes = {
+    'lower': true,
+    'upper': true,
+    'numbers': true,
+    'symbols': true,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -18,48 +23,50 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Password Generator'),
       ),
       body: Center(
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                child: const Text('a983r4/aoweri'),
-              ),
-              Slider(
-                label: 'Length $passwordLength',
-                divisions: 30,
-                min: 8,
-                max: 38,
-                value: passwordLength.toDouble(),
-                onChanged: (newValue) =>
-                    setState(() => passwordLength = newValue.toInt()),
-              ),
-              SwitchListTile(
-                title: const Text('Include Lowercase'),
-                value: lower,
-                onChanged: (newValue) => setState(() => lower = newValue),
-              ),
-              SwitchListTile(
-                title: const Text('Include Uppercase'),
-                value: upper,
-                onChanged: (newValue) => setState(() => upper = newValue),
-              ),
-              SwitchListTile(
-                title: const Text('Include Number'),
-                value: numbers,
-                onChanged: (newValue) => setState(() => numbers = newValue),
-              ),
-              SwitchListTile(
-                title: const Text('Include Symbol'),
-                value: symbols,
-                onChanged: (newValue) => setState(() => symbols = newValue),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Generate Password'),
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('a983r4/aoweri'),
+            Slider(
+              label: 'Length $passwordLength',
+              divisions: 30,
+              min: 8,
+              max: 38,
+              value: passwordLength.toDouble(),
+              onChanged: (newValue) =>
+                  setState(() => passwordLength = newValue.toInt()),
+            ),
+            SwitchListTile(
+              title: const Text('Include Lowercase'),
+              value: includes['lower']!,
+              onChanged: (newValue) =>
+                  setState(() => includes['lower'] = newValue),
+            ),
+            SwitchListTile(
+              title: const Text('Include Uppercase'),
+              value: includes['upper']!,
+              onChanged: (newValue) =>
+                  setState(() => includes['upper'] = newValue),
+            ),
+            SwitchListTile(
+              title: const Text('Include Number'),
+              value: includes['numbers']!,
+              onChanged: (newValue) =>
+                  setState(() => includes['numbers'] = newValue),
+            ),
+            SwitchListTile(
+              title: const Text('Include Symbol'),
+              value: includes['symbols']!,
+              onChanged: (newValue) =>
+                  setState(() => includes['symbols'] = newValue),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                print(includes);
+              },
+              child: const Text('Generate Password'),
+            ),
+          ],
         ),
       ),
     );
