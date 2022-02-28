@@ -43,7 +43,7 @@ String generatePassword(int length, Map<String, bool> includes) {
     passwordList.add(characterSet[randInt]);
   }
 
-  return shuffle(passwordList).toString();
+  return shuffle(passwordList).join();
 }
 
 List<String> arrayFromRange(int start, int end) {
