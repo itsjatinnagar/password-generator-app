@@ -9,6 +9,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String randomPassword = '';
   int passwordLength = 16;
   Map<String, bool> includes = {
     'lower': true,
@@ -27,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('a983r4/aoweri'),
+            Text(randomPassword),
             Slider(
               label: 'Length $passwordLength',
               divisions: 30,
@@ -62,7 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() => includes['symbols'] = newValue),
             ),
             ElevatedButton(
-              onPressed: () => generatePassword(passwordLength, includes),
+              onPressed: () => setState(
+                () =>
+                    randomPassword = generatePassword(passwordLength, includes),
+              ),
               child: const Text('Generate Password'),
             ),
           ],
