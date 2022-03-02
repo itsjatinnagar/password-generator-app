@@ -28,7 +28,22 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(randomPassword),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 14.0),
+              padding: const EdgeInsets.all(10.0),
+              width: double.infinity,
+              decoration: const BoxDecoration(color: Colors.blue),
+              child: Text(
+                randomPassword,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 26,
+                  fontFamily: 'Courier New',
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
             Slider(
               label: 'Length $passwordLength',
               divisions: 30,
