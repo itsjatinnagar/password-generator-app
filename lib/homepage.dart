@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pass_gen/generator.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -28,20 +29,30 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 14.0),
-              padding: const EdgeInsets.all(10.0),
-              width: double.infinity,
-              decoration: const BoxDecoration(color: Colors.blue),
-              child: Text(
-                randomPassword,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 26,
-                  fontFamily: 'Courier New',
-                  fontWeight: FontWeight.bold,
+            GestureDetector(
+              onTap: () =>
+                  Clipboard.setData(ClipboardData(text: randomPassword)).then(
+                (value) => ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Generated Password copied to clipboard!'),
+                  ),
                 ),
-                textAlign: TextAlign.center,
+              ),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 14.0),
+                padding: const EdgeInsets.all(10.0),
+                width: double.infinity,
+                decoration: const BoxDecoration(color: Colors.blue),
+                child: Text(
+                  randomPassword,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 26,
+                    fontFamily: 'Courier New',
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
             Slider(
